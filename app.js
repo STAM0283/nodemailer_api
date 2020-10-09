@@ -26,7 +26,7 @@ app.use(limiter);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.post("/mail", (req, res, next) => {
+app.post("/contact", (req, res, next) => {
   const output = `
       <p>Vous avez un nouveau message</p>
       <h3>Détails du contact</h3>
