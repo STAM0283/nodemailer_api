@@ -27,92 +27,54 @@ app.use(limiter);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.post("/send-email", function (req, res, next) {
-  const transporter = nodeMailer.createTransport({
+
+app.post("/contact", (req, res, next) => {
+  // const output = `
+  //     <p>Vous avez un nouveau message</p>
+  //     <h3>Détails du contact</h3>
+  //     <ul>
+  //        <li>Nom : ${req.body.firstName}</li>
+  //        <li>Prénom : ${req.body.lastName}</li>
+  //        <li>E-mail: ${req.body.email}</li>
+  //     </ul>
+  //     <h3>Message :</h3>
+  //     <p>${req.body.message}</p>
+  // `;
+  let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     service: "gmail",
-    auth: {
-      user: process.env.EMAIL,
-      pass: process.env.PASSWORD,
-    },
     port: 465,
-    secure: true,
+    secure: true, 
+    auth: {
+      user: process.env.EMAIL, 
+      pass: process.env.PASSWORD
+    },
   });
 
-  const mailOptions = {
-    from: req.body.email,
+  let info = transporter.sendMail({
+    from: process.env.EMAIL, 
     to: process.env.EMAIL,
-    subject: req.body.message,
+    firstName: req.body.firstName, 
+    lastName: req.body.lastName,
+    email: req.body.email, 
+    message: req.body.message, 
     html:
-      req.body.firtsName +
+      req.body.firstName +
       " (" +
       req.body.lastName +
       " (" +
       req.body.email +
       ") " +
       " send this message : " +
-      req.body.message,
-  };
-
-  transporter.sendMail(mailOptions, (err, info) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.status(200).json({
-        success: true,
-        messages: "Email Sent",
-      });
+      req.body.message, 
+  }, (err) => {
+    if(err){
+      console.log("il ya eu une erreur dans l'envois du mail")
     }
+    res.send("Email a été envoyé avec succés")
   });
-});
-
-// app.post("/contact", (req, res, next) => {
-//   // const output = `
-//   //     <p>Vous avez un nouveau message</p>
-//   //     <h3>Détails du contact</h3>
-//   //     <ul>
-//   //        <li>Nom : ${req.body.firstName}</li>
-//   //        <li>Prénom : ${req.body.lastName}</li>
-//   //        <li>E-mail: ${req.body.email}</li>
-//   //     </ul>
-//   //     <h3>Message :</h3>
-//   //     <p>${req.body.message}</p>
-//   // `;
-//   let transporter = nodemailer.createTransport({
-//     host: "smtp.gmail.com",
-//     service: "gmail",
-//     port: 465,
-//     secure: true, 
-//     auth: {
-//       user: process.env.EMAIL, 
-//       pass: process.env.PASSWORD
-//     },
-//   });
-
-//   let info = transporter.sendMail({
-//     from: process.env.EMAIL, 
-//     to: process.env.EMAIL,
-//     firstName: req.body.firstName, 
-//     lastName: req.body.lastName,
-//     email: req.body.email, 
-//     message: req.body.message, 
-//     html:
-//       req.body.firstName +
-//       " (" +
-//       req.body.lastName +
-//       " (" +
-//       req.body.email +
-//       ") " +
-//       " send this message : " +
-//       req.body.message, 
-//   }, (err) => {
-//     if(err){
-//       console.log("il ya eu une erreur dans l'envois du mail")
-//     }
-//     res.send("Email a été envoyé avec succés")
-//   });
-//   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-// })
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+})
 
 
 
