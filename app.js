@@ -28,45 +28,37 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-app.post("/contact", (req, res, next) => {
-  // const output = `
-  //     <p>Vous avez un nouveau message</p>
-  //     <h3>Détails du contact</h3>
-  //     <ul>
-  //        <li>Nom : ${req.body.firstName}</li>
-  //        <li>Prénom : ${req.body.lastName}</li>
-  //        <li>E-mail: ${req.body.email}</li>
-  //     </ul>
-  //     <h3>Message :</h3>
-  //     <p>${req.body.message}</p>
-  // `;
+app.post("/send-mail", (req, res, next) => {
+  const output = `
+      <p>Vous avez un nouveau message</p>
+      <h3>Détails du contact</h3>
+      <ul>
+         <li>Nom : ${req.body.firstName}</li>
+         <li>Prénom : ${req.body.lastName}</li>
+         <li>E-mail: ${req.body.email}</li>
+      </ul>
+      <h3>Message :</h3>
+      <p>${req.body.message}</p>
+  `;
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     service: "gmail",
     port: 465,
     secure: true, 
     auth: {
-      user: process.env.EMAIL, 
-      pass: process.env.PASSWORD
+      user: "aminestambouli00780@gmail.com", 
+      pass: "stam@00780"
     },
   });
 
   let info = transporter.sendMail({
     from: process.env.EMAIL, 
-    to: process.env.EMAIL,
+    to: "aminestambouli00780@gmail.com",
     firstName: req.body.firstName, 
     lastName: req.body.lastName,
     email: req.body.email, 
     message: req.body.message, 
-    html:
-      req.body.firstName +
-      " (" +
-      req.body.lastName +
-      " (" +
-      req.body.email +
-      ") " +
-      " send this message : " +
-      req.body.message, 
+    html: output, 
   }, (err) => {
     if(err){
       console.log("il ya eu une erreur dans l'envois du mail")
