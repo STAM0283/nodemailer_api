@@ -50,7 +50,7 @@ app.post("/contact", (req, res, next) => {
   });
 
   let info = transporter.sendMail({
-    from: req.body.email, 
+    from: process.env.EMAIL, 
     to: process.env.EMAIL,
     firstName: req.body.firstName, 
     lastName: req.body.lastName,
