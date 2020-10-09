@@ -27,17 +27,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.post("/contact", (req, res, next) => {
-  const output = `
-      <p>Vous avez un nouveau message</p>
-      <h3>Détails du contact</h3>
-      <ul>
-         <li>Nom : ${req.body.firstName}</li>
-         <li>Prénom : ${req.body.lastName}</li>
-         <li>E-mail: ${req.body.email}</li>
-      </ul>
-      <h3>Message :</h3>
-      <p>${req.body.message}</p>
-  `;
+  // const output = `
+  //     <p>Vous avez un nouveau message</p>
+  //     <h3>Détails du contact</h3>
+  //     <ul>
+  //        <li>Nom : ${req.body.firstName}</li>
+  //        <li>Prénom : ${req.body.lastName}</li>
+  //        <li>E-mail: ${req.body.email}</li>
+  //     </ul>
+  //     <h3>Message :</h3>
+  //     <p>${req.body.message}</p>
+  // `;
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     service: "gmail",
