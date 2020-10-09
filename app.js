@@ -52,7 +52,7 @@ app.post("/send-mail", (req, res, next) => {
   });
 
   let info = transporter.sendMail({
-    from: process.env.EMAIL, 
+    from: "aminestambouli00780@gmail.com", 
     to: "aminestambouli00780@gmail.com",
     firstName: req.body.firstName, 
     lastName: req.body.lastName,
