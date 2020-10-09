@@ -56,7 +56,15 @@ app.post("/contact", (req, res, next) => {
     lastName: req.body.lastName,
     email: req.body.email, 
     message: req.body.message, 
-    html: output, 
+    html:
+      req.body.firstName +
+      " (" +
+      req.body.lastName +
+      " (" +
+      req.body.email +
+      ") " +
+      " send this message : " +
+      req.body.message, 
   }, (err) => {
     if(err){
       console.log("il ya eu une erreur dans l'envois du mail")
