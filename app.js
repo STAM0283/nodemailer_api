@@ -49,7 +49,7 @@ app.post("/contact", (req, res, next) => {
   });
 
   let info = transporter.sendMail({
-    from: req.body.email, 
+    from: "aminestambouli00780@gmail.com", 
     to: "aminestambouli00780@gmail.com",
     firstName: req.body.firstName, 
     lastName: req.body.lastName,
