@@ -49,6 +49,10 @@ app.post("/send-email", (req, res, next) => {
       user: process.env.EMAIL, 
       pass: process.env.PASSWORD,
     },
+    tls: {
+      // do not fail on invalid certs
+      rejectUnauthorized: false
+    }
   });
 
   let info = transporter.sendMail({
