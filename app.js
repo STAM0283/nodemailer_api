@@ -54,10 +54,10 @@ app.post("/send-email", (req, res, next) => {
   let info = transporter.sendMail({
     from: process.env.EMAIL, 
     to: process.env.EMAIL,
-    firstName: req.body.firstName, 
-    lastName: req.body.lastName,
-    email: req.body.email, 
-    message: req.body.message, 
+    // firstName: req.body.firstName, 
+    // lastName: req.body.lastName,
+    // email: req.body.email, 
+    // subjetc: req.body.message, 
     html: output, 
   }, (err) => {
     if(err){
