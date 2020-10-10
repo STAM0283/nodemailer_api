@@ -27,7 +27,9 @@ app.use(limiter);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
+app.get("/contat", (req, res) => {
+  res.send("bienvenue sur notre app")
+})
 app.post("/send-email", (req, res, next) => {
   // let output = `
   //     <p>Vous avez un nouveau message</p>
