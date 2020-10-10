@@ -10,7 +10,6 @@
     "sendmail",
     "nodemailer"
   ],
-  
   "author": "",
   "license": "ISC",
   "dependencies": {
