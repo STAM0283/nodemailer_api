@@ -11,9 +11,8 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://curriculum-vitae-stambouli-amine.netlify.app");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
-  res.header('Access-Control-Allow-Methods', 'GET','POST')
   next();
 });
 
