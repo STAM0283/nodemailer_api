@@ -29,17 +29,17 @@ app.use(bodyParser.json());
 
 
 app.post("/send-email", (req, res, next) => {
-  let output = `
-      <p>Vous avez un nouveau message</p>
-      <h3>Détails du contact</h3>
-      <ul>
-         <li>Nom : ${req.body.firstName}</li>
-         <li>Prénom : ${req.body.lastName}</li>
-         <li>E-mail: ${req.body.email}</li>
-      </ul>
-      <h3>Message :</h3>
-      <p>${req.body.message}</p>
-  `;
+  // let output = `
+  //     <p>Vous avez un nouveau message</p>
+  //     <h3>Détails du contact</h3>
+  //     <ul>
+  //        <li>Nom : ${req.body.firstName}</li>
+  //        <li>Prénom : ${req.body.lastName}</li>
+  //        <li>E-mail: ${req.body.email}</li>
+  //     </ul>
+  //     <h3>Message :</h3>
+  //     <p>${req.body.message}</p>
+  // `;
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     service: "gmail",
@@ -58,7 +58,17 @@ app.post("/send-email", (req, res, next) => {
     // lastName: req.body.lastName,
     // email: req.body.email, 
     // subjetc: req.body.message, 
-    html: output, 
+    html: `
+    <p>Vous avez un nouveau message</p>
+    <h3>Détails du contact</h3>
+    <ul>
+       <li>Nom : ${req.body.firstName}</li>
+       <li>Prénom : ${req.body.lastName}</li>
+       <li>E-mail: ${req.body.email}</li>
+    </ul>
+    <h3>Message :</h3>
+    <p>${req.body.message}</p>
+`, 
   }, (err) => {
     if(err){
       console.log("il ya eu une erreur dans l'envois du mail")
