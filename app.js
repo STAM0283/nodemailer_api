@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 
 
 app.post("/send-email", (req, res, next) => {
-  const output = `
+  let output = `
       <p>Vous avez un nouveau message</p>
       <h3>Détails du contact</h3>
       <ul>
@@ -52,7 +52,7 @@ app.post("/send-email", (req, res, next) => {
   });
 
   let info = transporter.sendMail({
-    from: req.body.email, 
+    from: process.env.EMAIL, 
     to: process.env.EMAIL,
     firstName: req.body.firstName, 
     lastName: req.body.lastName,
