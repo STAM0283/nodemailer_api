@@ -16,12 +16,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// const rateLimit = require("express-rate-limit");
+const rateLimit = require("express-rate-limit");
 
-// const limiter = rateLimit({
-//   windowMs: 3 * 60 * 1000,
-//   max: 30, // per IP
-// });
+const limiter = rateLimit({
+  windowMs: 3 * 60 * 1000,
+  max: 30, // per IP
+});
 
 app.use(limiter);
 app.use(bodyParser.urlencoded({ extended: true }));
